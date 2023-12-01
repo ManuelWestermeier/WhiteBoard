@@ -4,11 +4,19 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
 canvas {
     background-color: black;
-    width: 1000px;
-    height: 1000px;
+    width: 8000px;
+    height: 8000px;
     margin: auto;
+    user-select: none;
 }
 
 .controlls {
@@ -23,6 +31,7 @@ canvas {
     place-items: center;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     gap: 10px;
+    user-select: none;
 }
 
 .controlls .elem input {
@@ -36,4 +45,59 @@ canvas {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.movable {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    height: 80px;
+    width: 80px;
+    background-color: rgb(59, 59, 59);
+    color: white;
+    border-radius: 50%;
+}
+
+.movable span {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: black;
+    fill: white;
+    transition: all 0.2s linear;
+    user-select: none;
+}
+
+.movable span:hover {
+    transform: scale(1.2);
+}
+
+.movable ._1 {
+    position: absolute;
+    left: calc(50% - 15px);
+    right: calc(50% - 15px);
+    top: 0;
+}
+
+.movable ._2 {
+    position: absolute;
+    right: 0px;
+    top: calc(50% - 15px);
+}
+
+.movable ._3 {
+    position: absolute;
+    left: 0px;
+    top: calc(50% - 15px);
+}
+
+.movable ._4 {
+    position: absolute;
+    left: calc(50% - 15px);
+    right: calc(50% - 15px);
+    top: calc(100% - 30px);
 }

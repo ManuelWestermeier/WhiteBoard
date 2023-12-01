@@ -5,39 +5,47 @@ var wss = new ws.WebSocketServer({
     port: 8080
 })
 
-
 var rooms = {
 
 }
 
 wss.on("connection", socket => {
+
     var room = ""
     var id = Math.random() * 1000
+    var start = true;
 
     socket.onmessage = (msg) => {
-        var data = JSON.parse(msg.data.toString("utf-8"))
-        if (data?.function == "draw") {
-            Object.keys(rooms[room]).forEach(key => {
-                rooms[room][key]?.send(msg.data.toString("utf-8"))
-            })
-        }
-        else if (data?.function == "join") {
-            room = data?.room ?? "/"
+        var data = msg.data.toString("utf-8")
+
+        if (start) {
+            room = data;
             if (rooms[room])
-                rooms[room][id] = socket
-            else rooms[room] = { [id]: socket }
+                rooms[room][id] = socket;
+            else rooms[room] = {
+                [id]: socket
+            };
+            start = false;
+        }
+        else {
+            if (typeof rooms[room] != "object") return;
+            Object.keys(rooms[room]).forEach(key => {
+                if (rooms[room][key] != socket)
+                    rooms[room][key]?.send(data);
+            })
         }
     }
 
-    socket.on("close", close)
-    socket.on("error", close)
+    socket.on("close", close);
+    socket.on("error", close);
 
     function close() {
         try {
+            delete rooms[room][id]
             socket.close()
         } catch (error) { }
-        delete rooms[room][id]
     }
+
 })
 
 process.on("uncaughtException", e => {

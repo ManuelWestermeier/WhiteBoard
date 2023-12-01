@@ -19,8 +19,39 @@
             <p class="elem">Width:</p>
             <input value="4" id="WidthInput" type="range">
         </div>
+        <div>
+            <p class="elem">Opacity:</p>
+            <input value="100" id="OpacacityInput" type="range">
+        </div>
+        <div>
+            <button onclick="isDeleting=toggle(isDeleting)">Delete</button>
+        </div>
+        <div>
+            <button onclick="downloadImg()">Download</button>
+            <button onclick="canDraw=false;imgInput.click()">Open Image</button>
+            <input id="imgInput" type="file" style="display: none;">
+        </div>
     </div>
     <canvas></canvas>
+    <div class="movable">
+        <span onpointerdown="_scroll(0,-50)" class="_1">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z" />
+            </svg></span>
+        <span onpointerdown="_scroll(50,0)" class="_2">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
+            </svg></span>
+        <span onpointerdown="_scroll(-50,0)" class="_3">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+            </svg></span>
+        <span onpointerdown="_scroll(0,50)" class="_4">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
+            </svg>
+        </span>
+    </div>
 </body>
 
 </html>
