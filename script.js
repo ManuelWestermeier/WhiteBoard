@@ -122,6 +122,7 @@ ws.onopen = () => {
 
 function drawLine(color, lineWidth, startX, startY, x, y) {
     if (!canDraw) return
+    ctx.lineCap = "round"
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.lineWidth = lineWidth;
